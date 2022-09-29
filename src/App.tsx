@@ -14,15 +14,19 @@ import { TECH_PODCASTS_PRS, TECH_BOOTCAMPS_PRS } from "./url.constants";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function App() {
-  const [podcastData, setPodcastData] = useState([]);
-  const [bootcampData, setBootcampData] = useState([]);
   const [error, setError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    const repoUrls = [TECH_PODCASTS_PRS, TECH_BOOTCAMPS_PRS];
+  const [repoData, setRepoData] = useState({
+    podcastData: [],
+    bootcampData: [],
+  });
 
-    const getData = async () => {
+  const repoArrs = Object.values(repoData);
+
+  useEffect(() => {
+    const getRepoData = async () => {
+      const repoUrls = [TECH_PODCASTS_PRS, TECH_BOOTCAMPS_PRS];
       setIsLoading(true);
 
       try {
@@ -30,15 +34,18 @@ export default function App() {
           repoUrls.map((url) => fetch(url).then((res) => res.json()))
         );
         setIsLoading(false);
-        setPodcastData(podcasts);
-        setBootcampData(bootcamps);
+        setRepoData({
+          podcastData: podcasts,
+          bootcampData: bootcamps,
+        });
+        console.log(podcasts[0].url);
       } catch (err) {
         console.error(`There was an error loading the data: ${err}`);
         setError(true);
       }
     };
 
-    getData();
+    getRepoData();
   }, []);
 
   if (error) {
@@ -52,28 +59,27 @@ export default function App() {
   return (
     <>
       <Center>
-        <Heading my={3}>Hacktoberfest PR tracker</Heading>
+        <Heading my={3}>Hacktoberfest Open PR tracker</Heading>
       </Center>
 
-      {podcastData && (
+      {repoArrs.every((repo) => repo) && (
         <Tabs variant="enclosed">
           <TabList>
             <Tab>Tech-podcasts</Tab>
             <Tab>Tech-bootcamps</Tab>
           </TabList>
           <TabPanels>
-            <TabPanel>
-              {!podcastData.length
-                ? "No open PR's"
-                : podcastData.map(({ title, html_url }, idx) => (
-                    <Link key={idx} href={html_url} isExternal>
-                      {title} <ExternalLinkIcon mx="2px" />
-                    </Link>
-                  ))}
-            </TabPanel>
-            <TabPanel>
-              <p>two!</p>
-            </TabPanel>
+            {repoArrs.map((repo, idx) => (
+              <TabPanel key={idx}>
+                {!repo.length
+                  ? "No open PR's"
+                  : repo.map(({ title, html_url }, idx) => (
+                      <Link key={idx} href={html_url} isExternal>
+                        {title} <ExternalLinkIcon mx="2px" />
+                      </Link>
+                    ))}
+              </TabPanel>
+            ))}
           </TabPanels>
         </Tabs>
       )}
