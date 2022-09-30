@@ -7,6 +7,7 @@ import {
   TabPanels,
   TabPanel,
   Link,
+  css,
 } from "@chakra-ui/react";
 import { ErrorAlert } from "./components/ErrorAlert";
 import { useEffect, useState } from "react";
@@ -113,7 +114,16 @@ export default function App() {
 
       {repoArrs.every((repo) => repo) && (
         <Tabs variant="enclosed">
-          <TabList>
+          <TabList
+            overflowX="auto"
+            css={css({
+              scrollbarWidth: "none",
+              "::-webkit-scrollbar": { display: "none" },
+              "-webkit-overflow-scrolling": "touch",
+              boxShadow: "inset 0 -2px 0 rgba(0, 0, 0, 0.1)",
+              border: "0 none",
+            })}
+          >
             {REPOS_ARRAY.map((repo, idx) => (
               <Tab key={`${repo}${idx}`}>{repo}</Tab>
             ))}
