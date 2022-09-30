@@ -10,7 +10,19 @@ import {
 } from "@chakra-ui/react";
 import { ErrorAlert } from "./components/ErrorAlert";
 import { useEffect, useState } from "react";
-import { TECH_PODCASTS_PRS, TECH_BOOTCAMPS_PRS } from "./constants";
+import {
+  REPOS_ARRAY,
+  DEVELOPER_QUIZ_SITE,
+  TECH_PODCASTS_PRS,
+  TECH_BOOTCAMPS_PRS,
+  DIVERSE_SPEAKERS,
+  TECH_COMMUNITY_SLACKS,
+  TECH_CONFERENCES_PRS,
+  TECH_DEV_TOOLING,
+  TECH_LEARNING_RESOURCES,
+  TECH_MEETUP_PRS,
+  TECH_NEWSLETTERS_PRS,
+} from "./constants";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function App() {
@@ -18,25 +30,63 @@ export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [repoData, setRepoData] = useState({
+    fccData: [],
     podcastData: [],
     bootcampData: [],
+    speakersData: [],
+    slacksData: [],
+    conferencesData: [],
+    toolingData: [],
+    coursesData: [],
+    meetupsData: [],
+    newslettersData: [],
   });
 
   const repoArrs = Object.values(repoData);
 
   useEffect(() => {
     const getRepoData = async () => {
-      const repoUrls = [TECH_PODCASTS_PRS, TECH_BOOTCAMPS_PRS];
+      const repoUrls = [
+        DEVELOPER_QUIZ_SITE,
+        TECH_PODCASTS_PRS,
+        TECH_BOOTCAMPS_PRS,
+        DIVERSE_SPEAKERS,
+        TECH_COMMUNITY_SLACKS,
+        TECH_CONFERENCES_PRS,
+        TECH_DEV_TOOLING,
+        TECH_LEARNING_RESOURCES,
+        TECH_MEETUP_PRS,
+        TECH_NEWSLETTERS_PRS,
+      ];
       setIsLoading(true);
 
       try {
-        const [podcasts, bootcamps] = await Promise.all(
+        const [
+          fccQuiz,
+          podcasts,
+          bootcamps,
+          speakers,
+          slacks,
+          conferences,
+          tooling,
+          courses,
+          meetups,
+          newsletters,
+        ] = await Promise.all(
           repoUrls.map((url) => fetch(url).then((res) => res.json()))
         );
         setIsLoading(false);
         setRepoData({
+          fccData: fccQuiz,
           podcastData: podcasts,
           bootcampData: bootcamps,
+          speakersData: speakers,
+          slacksData: slacks,
+          conferencesData: conferences,
+          toolingData: tooling,
+          coursesData: courses,
+          meetupsData: meetups,
+          newslettersData: newsletters,
         });
       } catch (err) {
         console.error(`There was an error loading the data: ${err}`);
@@ -64,8 +114,9 @@ export default function App() {
       {repoArrs.every((repo) => repo) && (
         <Tabs variant="enclosed">
           <TabList>
-            <Tab>Tech-podcasts</Tab>
-            <Tab>Tech-bootcamps</Tab>
+            {REPOS_ARRAY.map((repo, idx) => (
+              <Tab key={`${repo}${idx}`}>{repo}</Tab>
+            ))}
           </TabList>
           <TabPanels>
             {repoArrs.map((repo, idx) => (
