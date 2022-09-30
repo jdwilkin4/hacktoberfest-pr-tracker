@@ -10,11 +10,11 @@ import {
 } from "@chakra-ui/react";
 import { ErrorAlert } from "./components/ErrorAlert";
 import { useEffect, useState } from "react";
-import { TECH_PODCASTS_PRS, TECH_BOOTCAMPS_PRS } from "./url.constants";
+import { TECH_PODCASTS_PRS, TECH_BOOTCAMPS_PRS } from "./constants";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function App() {
-  const [error, setError] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [repoData, setRepoData] = useState({
@@ -38,17 +38,16 @@ export default function App() {
           podcastData: podcasts,
           bootcampData: bootcamps,
         });
-        console.log(podcasts[0].url);
       } catch (err) {
         console.error(`There was an error loading the data: ${err}`);
-        setError(true);
+        setIsError(true);
       }
     };
 
     getRepoData();
   }, []);
 
-  if (error) {
+  if (isError) {
     return <ErrorAlert />;
   }
 
