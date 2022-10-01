@@ -5,13 +5,13 @@ export const REPOS_ARRAY: string[] = [
   "Developer Quiz Site",
   "tech-podcasts",
   "tech-bootcamps",
-  "tech-newsletters",
-  "tech-conferences",
-  "tech-meetups",
-  "tech-community-slacks",
-  "tech-learning-resources",
-  "tech-dev-tooling",
   "diverse-speakers",
+  "tech-community-slacks",
+  "tech-conferences",
+  "tech-dev-tooling",
+  "tech-learning-resources",
+  "tech-meetups",
+  "tech-newsletters",
 ];
 
 export const DEVELOPER_QUIZ_SITE = `${GITHUB_API_REPO_URL}freeCodeCamp/Developer_Quiz_Site/${PR_OPEN_QUERY_PARAM}`;
