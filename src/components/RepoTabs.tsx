@@ -24,6 +24,8 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { Loading } from "./Loading";
+
 export const RepoTabs = () => {
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -91,8 +93,10 @@ export const RepoTabs = () => {
         setIsError(true);
       }
     };
-
-    getRepoData();
+    setTimeout(() => {
+      getRepoData();
+    }, 5000);
+    // getRepoData();
   }, []);
 
   if (isError) {
@@ -100,7 +104,7 @@ export const RepoTabs = () => {
   }
 
   if (isLoading) {
-    return <p>loading...</p>;
+    return <Loading />;
   }
   return (
     <Box>
