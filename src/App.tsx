@@ -8,6 +8,7 @@ import {
   TabPanel,
   Link,
   css,
+  Box,
 } from "@chakra-ui/react";
 import { ErrorAlert } from "./components/ErrorAlert";
 import { useEffect, useState } from "react";
@@ -107,9 +108,9 @@ export default function App() {
   }
 
   return (
-    <>
+    <Box>
       <Center>
-        <Heading my={3}>Hacktoberfest Open PR tracker</Heading>
+        <Heading my="9">Hacktoberfest Open PR tracker</Heading>
       </Center>
 
       {repoArrs.every((repo) => repo) && (
@@ -134,15 +135,17 @@ export default function App() {
                 {!repo.length
                   ? "No open PR's"
                   : repo.map(({ title, html_url }, idx) => (
-                      <Link key={idx} href={html_url} isExternal>
-                        {title} <ExternalLinkIcon mx="2px" />
-                      </Link>
+                      <Box>
+                        <Link key={idx} href={html_url} isExternal>
+                          {title} <ExternalLinkIcon mx="2px" />
+                        </Link>
+                      </Box>
                     ))}
               </TabPanel>
             ))}
           </TabPanels>
         </Tabs>
       )}
-    </>
+    </Box>
   );
 }

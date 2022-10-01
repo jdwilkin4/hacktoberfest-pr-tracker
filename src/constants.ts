@@ -9,8 +9,8 @@ export const REPOS_ARRAY: string[] = [
   "tech-conferences",
   "tech-meetups",
   "tech-community-slacks",
-  "tech-dev-tooling",
   "tech-learning-resources",
+  "tech-dev-tooling",
   "diverse-speakers",
 ];
 
