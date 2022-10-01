@@ -30,7 +30,7 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 export default function App() {
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  console.log(DEVELOPER_QUIZ_SITE);
   const [repoData, setRepoData] = useState({
     fccData: [],
     podcastData: [],
@@ -120,7 +120,7 @@ export default function App() {
             css={css({
               scrollbarWidth: "none",
               "::-webkit-scrollbar": { display: "none" },
-              "-webkit-overflow-scrolling": "touch",
+              WebkitOverflowScrolling: "touch",
               boxShadow: "inset 0 -2px 0 rgba(0, 0, 0, 0.1)",
               border: "0 none",
             })}
@@ -131,12 +131,12 @@ export default function App() {
           </TabList>
           <TabPanels>
             {repoArrs.map((repo, idx) => (
-              <TabPanel key={idx}>
+              <TabPanel key={`${repo}${idx}`}>
                 {!repo.length
                   ? "No open PR's"
                   : repo.map(({ title, html_url }, idx) => (
-                      <Box>
-                        <Link key={idx} href={html_url} isExternal>
+                      <Box key={`${title}${idx}`}>
+                        <Link href={html_url} isExternal>
                           {title} <ExternalLinkIcon mx="2px" />
                         </Link>
                       </Box>
