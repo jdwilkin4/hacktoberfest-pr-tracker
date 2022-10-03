@@ -22,6 +22,8 @@ import {
   Link,
   css,
   Box,
+  ListItem,
+  OrderedList,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Loading } from "./Loading";
@@ -95,8 +97,7 @@ export const RepoTabs = () => {
     };
     setTimeout(() => {
       getRepoData();
-    }, 5000);
-    // getRepoData();
+    }, 3000);
   }, []);
 
   if (isError) {
@@ -127,15 +128,19 @@ export const RepoTabs = () => {
           <TabPanels>
             {repoArrs.map((repo, idx) => (
               <TabPanel key={`${repo}${idx}`}>
-                {!repo.length
-                  ? "No open PR's"
-                  : repo.map(({ title, html_url }, idx) => (
-                      <Box key={`${title}${idx}`}>
-                        <Link href={html_url} isExternal>
+                <OrderedList>
+                  {!repo.length ? (
+                    <Box>No open PR's</Box>
+                  ) : (
+                    repo.map(({ title, html_url }, idx) => (
+                      <ListItem>
+                        <Link key={`${title}${idx}`} href={html_url} isExternal>
                           {title} <ExternalLinkIcon mx="2px" />
                         </Link>
-                      </Box>
-                    ))}
+                      </ListItem>
+                    ))
+                  )}
+                </OrderedList>
               </TabPanel>
             ))}
           </TabPanels>
