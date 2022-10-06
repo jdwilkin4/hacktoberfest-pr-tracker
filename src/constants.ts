@@ -12,6 +12,7 @@ export const REPOS_ARRAY: string[] = [
   "tech-learning-resources",
   "tech-meetups",
   "tech-newsletters",
+  "framework.dev",
 ];
 
 export const DEVELOPER_QUIZ_SITE = `${GITHUB_API_REPO_URL}freeCodeCamp/Developer_Quiz_Site/${PR_OPEN_QUERY_PARAM}`;
@@ -24,3 +25,4 @@ export const TECH_COMMUNITY_SLACKS = `${GITHUB_API_REPO_URL}thisdot/tech-communi
 export const TECH_DEV_TOOLING = `${GITHUB_API_REPO_URL}thisdot/tech-dev-tooling/${PR_OPEN_QUERY_PARAM}`;
 export const TECH_LEARNING_RESOURCES = `${GITHUB_API_REPO_URL}thisdot/tech-learning-resources/${PR_OPEN_QUERY_PARAM}`;
 export const DIVERSE_SPEAKERS = `${GITHUB_API_REPO_URL}thisdot/diverse-speakers/${PR_OPEN_QUERY_PARAM}`;
+export const FRAMEWORK_DEV = `${GITHUB_API_REPO_URL}thisdot/framework.dev/${PR_OPEN_QUERY_PARAM}`;

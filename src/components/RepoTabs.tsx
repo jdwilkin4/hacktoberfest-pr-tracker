@@ -12,6 +12,7 @@ import {
   TECH_LEARNING_RESOURCES,
   TECH_MEETUP_PRS,
   TECH_NEWSLETTERS_PRS,
+  FRAMEWORK_DEV,
 } from "../constants";
 import {
   Tabs,
@@ -42,6 +43,7 @@ export const RepoTabs = () => {
     coursesData: [],
     meetupsData: [],
     newslettersData: [],
+    frameworkData: [],
   });
 
   const repoArrs = Object.values(repoData);
@@ -59,6 +61,7 @@ export const RepoTabs = () => {
         TECH_LEARNING_RESOURCES,
         TECH_MEETUP_PRS,
         TECH_NEWSLETTERS_PRS,
+        FRAMEWORK_DEV,
       ];
       setIsLoading(true);
 
@@ -74,6 +77,7 @@ export const RepoTabs = () => {
           courses,
           meetups,
           newsletters,
+          frameworks,
         ] = await Promise.all(
           repoUrls.map((url) => fetch(url).then((res) => res.json()))
         );
@@ -89,6 +93,7 @@ export const RepoTabs = () => {
           coursesData: courses,
           meetupsData: meetups,
           newslettersData: newsletters,
+          frameworkData: frameworks,
         });
       } catch (err) {
         console.error(`There was an error loading the data: ${err}`);
