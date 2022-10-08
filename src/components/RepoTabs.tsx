@@ -112,6 +112,7 @@ export const RepoTabs = () => {
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <Box>
       {repoArrs.every((repo) => repo) && (
@@ -138,8 +139,8 @@ export const RepoTabs = () => {
                     <Box>No open PR's</Box>
                   ) : (
                     repo.map(({ title, html_url }, idx) => (
-                      <ListItem>
-                        <Link key={`${title}${idx}`} href={html_url} isExternal>
+                      <ListItem key={`${title}${idx}`}>
+                        <Link href={html_url} isExternal>
                           {title} <ExternalLinkIcon mx="2px" />
                         </Link>
                       </ListItem>
