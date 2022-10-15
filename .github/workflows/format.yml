@@ -1,4 +1,4 @@
-name: Format
+name: Formatting files with Prettier
 on:
   pull_request:
     branches: [main]
